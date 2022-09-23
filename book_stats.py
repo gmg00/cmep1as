@@ -18,18 +18,39 @@
 """
 
 import argparse
+import matplotlib.pyplot as plt
 
 
 def process(file_path):
-    """
+    """Get file_path and process stats.
     """
     print(f'Opening input file {file_path}...')
-    with open(file_path, 'r') as input_file:
+    with open(file_path, 'r', encoding='utf-8') as input_file:
         text = input_file.read()
-    print(text)
+    letters = get_letters(text)
+    print(letters)
+    build_histogram(letters)
     print('Done.')
 
+def get_letters(text):
+    """Create a dictionary (letters), put chars as keys and give them as values
+    the number of occurences.
+    """
+    letters = {}
+    for element in text:
+        if not element in letters:
+            letters[str(element)] = text.count(element)
+    letters = dict(sorted(letters.items()))
+    return letters
 
+def build_histogram(letters):
+    """
+    """
+    letters_keys = list(letters.keys()) 
+    letters_values = list(letters.values())
+    x_values = letters_keys[letters_keys.index('A') : letters_keys.index('Z')]
+    y_values = letters_values[letters_keys.index('A') : letters_keys.index('Z')]
+    
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Print some book statistics')
