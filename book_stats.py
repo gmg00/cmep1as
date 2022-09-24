@@ -19,37 +19,59 @@
 
 import argparse
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def process(file_path):
     """Get file_path and process stats.
     """
     print(f'Opening input file {file_path}...')
+    # Get the text.
     with open(file_path, 'r', encoding='utf-8') as input_file:
         text = input_file.read()
+    # Get the dictionary with letters and their occurences.
     letters = get_letters(text)
     print(letters)
+    # Build histogram.
     build_histogram(letters)
     print('Done.')
 
 def get_letters(text):
-    """Create a dictionary (letters), put chars as keys and give them as values
+    """ Create a dictionary (letters), put chars as keys and give them as values
     the number of occurences.
     """
-    letters = {}
+    letters = {} # Dictionary.
+
     for element in text:
-        if not element in letters:
+        # If the element is not in letters it creates a new key and gives it as value
+        # the number of occurences.
+        if element not in letters:
             letters[str(element)] = text.count(element)
+    # Sort the keys in alphabetic order (upper case letters and lower case letters
+    # are different characters).
     letters = dict(sorted(letters.items()))
     return letters
 
 def build_histogram(letters):
+    """ Create an histogram with letters on x-axis and the number of occurences on
+    y-axis.
     """
-    """
+    # Get the keys and values from letters dictionary.
     letters_keys = list(letters.keys()) 
     letters_values = list(letters.values())
+    # Get letters from 'A' to 'Z' and their relative occurences.
     x_values = letters_keys[letters_keys.index('A') : letters_keys.index('Z')]
     y_values = letters_values[letters_keys.index('A') : letters_keys.index('Z')]
+
+    # Build histogram.
+    plt.figure()
+    x_pos = np.arange(len(x_values)) 
+    plt.bar(x_pos, y_values) # Histogram.
+    plt.title('Histogram')
+    plt.xlabel('Letters')
+    plt.ylabel('Occurences')
+    plt.xticks(x_pos, x_values) # Write letters on x-axis.
+    plt.show()
     
 
 if __name__ == '__main__':
