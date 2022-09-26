@@ -60,11 +60,13 @@ def build_histogram(letters):
     letters_keys = list(letters.keys()) 
     letters_values = list(letters.values())
     # Get letters from 'A' to 'Z' and their relative occurences.
-    x_values = letters_keys[letters_keys.index('A') : letters_keys.index('Z')]
-    y_values = letters_values[letters_keys.index('A') : letters_keys.index('Z')]
+    x_values = letters_keys[letters_keys.index('A') : letters_keys.index('Z')+1]
+    # Add occurences of upper case letters and lower case letters.
+    y_values = np.add(letters_values[letters_keys.index('A') : letters_keys.index('Z')+1],
+                      letters_values[letters_keys.index('a') : letters_keys.index('z')+1])
 
     # Build histogram.
-    plt.figure()
+    plt.figure(1)
     x_pos = np.arange(len(x_values)) 
     plt.bar(x_pos, y_values) # Histogram.
     plt.title('Histogram')
