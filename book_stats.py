@@ -21,7 +21,7 @@ import argparse
 import time
 import matplotlib.pyplot as plt
 import numpy as np
-
+# Define initial time T_0.
 T_0 = time.time()
 
 def process(file_path, histogram_switch):
@@ -87,7 +87,6 @@ def elapsed_time():
     print(f'Elapsed time: {elapsed_t:.3f} s')
 
 if __name__ == '__main__':
-    # Get the inital time.
     # Create a parser and add arguments.
     parser = argparse.ArgumentParser(description='Print some book statistics')
     parser.add_argument('infile', type=str, help='path to the input file')
