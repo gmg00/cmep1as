@@ -20,6 +20,7 @@
 import argparse
 import matplotlib.pyplot as plt
 import numpy as np
+import time
 
 
 def process(file_path, histogram_switch):
@@ -77,8 +78,16 @@ def build_histogram(letters):
     plt.show()
 
 if __name__ == '__main__':
+    # Get the inital time.
+    t_0 = time.time()
+    # Create a parser and add arguments.
     parser = argparse.ArgumentParser(description='Print some book statistics')
     parser.add_argument('infile', type=str, help='path to the input file')
+    # Argument to get a histogram.
     parser.add_argument('--histogram', action='store_true')
     args = parser.parse_args()
+    # Call process function.
     process(args.infile, args.histogram)
+    # Calculate the elapsed time.
+    elapsed_time = time.time() - t_0
+    print(f'Elapsed time: %.3f s' %elapsed_time)
