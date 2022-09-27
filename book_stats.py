@@ -75,10 +75,19 @@ def build_histogram(letters):
     plt.xlabel('Letters')
     plt.ylabel('Occurences')
     plt.xticks(x_pos, x_values) # Write letters on x-axis.
+    # Call elapsed_time().
+    elapsed_time()
     plt.show()
+
+def elapsed_time(*args):
+    """ Calculates elapsed time and prints it.
+    """
+    elapsed_t = time.time() - t_0
+    print(f'Elapsed time: %.3f s' %elapsed_t)
 
 if __name__ == '__main__':
     # Get the inital time.
+    global t_0
     t_0 = time.time()
     # Create a parser and add arguments.
     parser = argparse.ArgumentParser(description='Print some book statistics')
@@ -88,6 +97,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     # Call process function.
     process(args.infile, args.histogram)
-    # Calculate the elapsed time.
-    elapsed_time = time.time() - t_0
-    print(f'Elapsed time: %.3f s' %elapsed_time)
+    # If args.histogram == False calls elapsed_time().
+    if not args.histogram:
+        elapsed_time()
+
