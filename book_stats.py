@@ -33,7 +33,8 @@ def process(file_path, histogram_switch):
     letters = get_letters(text)
     print(letters)
     # Build histogram.
-    if histogram_switch: build_histogram(letters)
+    if histogram_switch:
+        build_histogram(letters)
     print('Done.')
 
 def get_letters(text):
@@ -57,7 +58,7 @@ def build_histogram(letters):
     y-axis.
     """
     # Get the keys and values from letters dictionary.
-    letters_keys = list(letters.keys()) 
+    letters_keys = list(letters.keys())
     letters_values = list(letters.values())
     # Get letters from 'A' to 'Z' and their relative occurences.
     x_values = letters_keys[letters_keys.index('A') : letters_keys.index('Z')+1]
@@ -67,14 +68,13 @@ def build_histogram(letters):
 
     # Build histogram.
     plt.figure(1)
-    x_pos = np.arange(len(x_values)) 
+    x_pos = np.arange(len(x_values))
     plt.bar(x_pos, y_values) # Histogram.
     plt.title('Histogram')
     plt.xlabel('Letters')
     plt.ylabel('Occurences')
     plt.xticks(x_pos, x_values) # Write letters on x-axis.
     plt.show()
-    
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Print some book statistics')
