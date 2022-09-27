@@ -22,8 +22,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def process(file_path):
-    """Get file_path and process stats.
+def process(file_path, histogram_switch):
+    """Get file_path and histogram_switch, if it's True process call build_histogram.
     """
     print(f'Opening input file {file_path}...')
     # Get the text.
@@ -33,7 +33,7 @@ def process(file_path):
     letters = get_letters(text)
     print(letters)
     # Build histogram.
-    build_histogram(letters)
+    if histogram_switch: build_histogram(letters)
     print('Done.')
 
 def get_letters(text):
@@ -79,5 +79,6 @@ def build_histogram(letters):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Print some book statistics')
     parser.add_argument('infile', type=str, help='path to the input file')
+    parser.add_argument('--histogram', action='store_true')
     args = parser.parse_args()
-    process(args.infile)
+    process(args.infile, args.histogram)
